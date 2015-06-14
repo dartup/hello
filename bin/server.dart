@@ -2,14 +2,14 @@ library hello;
 
 import 'dart:io';
 
-//Dartup will call my application with server.dart --port XXXX
-main(List<String> args){
+//Dartup will call my application with server.dart no arguments
+main(){
   // If port is not supplied. Set it to 8080 for local debugging;
   int port = 8080;
 
-  // don't want to depend on the args package so i know that port is argument 3 (item 2 in the list.)
-  if(args.length >= 3){
-    port = int.parse(args[2]);
+  // Get port from DARTUP_PORT if available.
+  if(Platform.environment.containsKey('DARTUP_PORT')){
+    port = int.parse(Platform.environment['DARTUP_PORT']);
   }
 
   //Dartup will connect from localhost.
@@ -20,10 +20,10 @@ main(List<String> args){
       body.writeln('<head><title>Hello Dartup</title></head>');
       body.writeln('<body>');
       //If you run in Dartup the environment variable 'DARTUP' will be set to 1.
-      if(new String.fromEnvironment('DARTUP') == '1'){
+      if(Platform.environment['DARTUP'] == '1'){
         body.writeln('<h1>Hello world from Dartup</h1>');
         //You will also have the hosted domain available. In this case hello.dartup.io.
-        body.writeln('I am currently running on ${String.fromEnvironment('DARTUP_DOMAIN')}');
+        body.writeln('I am currently running on ${Platform.environment['DARTUP_DOMAIN']}.');
       }else{
         body.writeln('<h1>Hello world from localhost</h1>');
         body.writeln('How dare you run me here of all places!');
