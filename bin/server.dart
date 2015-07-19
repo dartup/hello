@@ -16,7 +16,8 @@ main() async{
     if(dartup.onDartup()){
       body.writeln('<h1>Hello world from Dartup</h1>');
       //You will also have the hosted domain available. In this case hello.dartup.io.
-      body.writeln('I am currently running on ${dartup.mainDomain()}.');
+      body.writeln('I am currently running on ${dartup.mainDomain()}.<br>');
+      body.writeln('And i am upgradeable');
     }else{
       body.writeln('<h1>Hello world from localhost</h1>');
       body.writeln('How dare you run me here of all places!');
